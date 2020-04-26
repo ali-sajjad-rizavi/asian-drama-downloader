@@ -41,7 +41,7 @@ For example: https://dramanice.video/bride-of-the-century/
 After link is copied:
 
 Run downloader.py using python3.
-Paste the Anime link in the terminal/command-prompt and press ENTER.
+Paste the Drama link in the terminal/command-prompt and press ENTER.
 Provide the range of episodes you want to download.
 PAUSE AN ONGOING DOWNLOADE: Press [Ctrl+C] to pause download. To exit, press [Ctrl+C] again.
 
