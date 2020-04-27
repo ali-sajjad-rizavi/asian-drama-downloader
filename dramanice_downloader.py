@@ -68,7 +68,7 @@ class Drama:
 
 class Episode:
 	def __init__(self, title, pageurl):
-		self.__title = title
+		self.__title = title.replace('|', '-')
 		self.__pageurl = pageurl
 
 	def getTitle(self):
