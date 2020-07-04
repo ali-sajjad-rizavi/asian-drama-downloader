@@ -17,7 +17,7 @@ class DramaScraper:
 		self.dataDict['drama-url'] = url
 		#---
 		self.dataDict['episodes'] = []
-		for anchor in soup.find('ul', {'class':'list_episode'}).find_all('a'):
+		for anchor in reversed(soup.find('ul', {'class':'list_episode'}).find_all('a')):
 			episodeDict = {}
 			episodeDict['episode-title'] = RegExp.sub('[<>?":/|]', '', '{} - {}'.format(self.dataDict['drama-title'], ' '.join(anchor.text.split())))
 			episodeDict['episode-url'] = anchor['href']
@@ -30,8 +30,6 @@ class DramaScraper:
 			scraped_episodeDict = episodeDict
 			soup = BeautifulSoup(requests.get(episodeDict['episode-url'], headers=my_headers).text, 'html.parser')
 			serversList = soup.find('div', id='w-server').find_all('div') # arranged in ascending order
-			print(len(serversList))
-			input()
 			scraped_episodeDict['embed-servers'] = {}
 			for div in serversList:
 				server_name = div['class'][1].lower()
