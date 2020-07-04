@@ -22,6 +22,7 @@ class DramaScraper:
 			episodeDict['episode-title'] = RegExp.sub('[<>?":/|]', '', '{} - {}'.format(self.dataDict['drama-title'], ' '.join(anchor.text.split())))
 			episodeDict['episode-url'] = anchor['href']
 			self.dataDict['episodes'].append(episodeDict)
+		self.episode_count = len(self.dataDict['episodes'])
 
 	def scrapeEpisodes(self, start=1, end=1):
 		self.dataDict['scraped-episodes'] = []
