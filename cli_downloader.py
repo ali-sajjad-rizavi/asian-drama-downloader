@@ -56,7 +56,8 @@ class Downloader:
 	def __del__(self):
 		if len(glob.glob('downloaded/*.aria2')) != 0:
 			return
-		os.rename('downloaded', self.anime_dict['anime-title'])
+		if os.path.isdir('downloaded'):
+			os.rename('downloaded', self.drama_dict['drama-title'])
 		#---
 		if os.path.isfile('failed.txt'):
 			os.remove('failed.txt')
