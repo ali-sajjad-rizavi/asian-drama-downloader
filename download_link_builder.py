@@ -2,8 +2,8 @@ from videoservers import mp4upload
 
 
 def get_available_download_link(episode_dict):
-	if 'mp4' in episode_dict['embed-servers'].keys():
-		return mp4upload.get_mp4upload_download_link(episode_dict['embed-servers']['mp4'])
+	if 'mp4upload' in episode_dict['embed-servers'].keys():
+		return mp4upload.get_mp4upload_download_link(episode_dict['embed-servers']['mp4upload'])
 	return 'unavailable'
 
 
