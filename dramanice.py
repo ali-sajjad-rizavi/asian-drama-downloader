@@ -23,6 +23,23 @@ class DramaScraper:
 			episodeDict['episode-url'] = anchor['href']
 			self.dataDict['episodes'].append(episodeDict)
 
+	def scrapeEpisodes(self, start=1, end=1):
+		self.dataDict['scraped-episodes'] = []
+		for episodeDict in self.dataDict['episodes'][start-1:end]:
+			scraped_episodeDict = episodeDict
+			soup = BeautifulSoup(requests.get(episodeDict['episode-url'], headers=my_headers).text, 'html.parser')
+			serversList = soup.find('div', id='w-server').find_all('div') # arranged in ascending order
+			print(len(serversList))
+			input()
+			scraped_episodeDict['embed-servers'] = {}
+			for div in serversList:
+				server_name = div['class'][1].lower()
+				embed_url = div['data-server']
+				scraped_episodeDict['embed-servers'][server_name] = embed_url
+			#------
+			self.dataDict['scraped-episodes'].append(scraped_episodeDict)
+			print('- Collected:', scraped_episodeDict['episode-title'])
+
 	def saveJSON(self, filename='drama.json'):
 		open(filename, 'w', encoding='utf-8').write(json.dumps(self.dataDict, indent=4, sort_keys=True, ensure_ascii=False))
 
@@ -52,6 +69,7 @@ def main():
 		selected_index = int(input('\n- Select your option: ')) - 1
 		drama_scraper = DramaScraper(search_results[selected_index][1])
 	print('-------------------')
+	drama_scraper.scrapeEpisodes()
 	drama_scraper.saveJSON()
 	print('- JSON saved!')
 
