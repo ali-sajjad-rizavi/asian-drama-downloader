@@ -44,9 +44,9 @@ class DramaScraper:
 
 	# STATIC METHOD
 	def searchDrama(query='drama name'):
-		response_text = requests.get('https://dramanice.video/?s={}'.format(query.replace(' ', '+'))).text
-		figure_results = BeautifulSoup(response_text, 'html.parser').find('ul', class_='list-thumb').find_all('figure', class_='post-thumbnail')[:4]
-		paired_results = [(figure.find('a')['title'], figure.find('a')['href']) for figure in figure_results]
+		response_text = requests.get('https://watchasian.net/search?keyword={}'.format(query.replace(' ', '+')), headers=my_headers).text
+		search_results = BeautifulSoup(response_text, 'html.parser').find('ul', class_='switch-block list-episode-item').find_all('a')[:4]
+		paired_results = [(anchor.find('h3', class_='title').text.strip(), 'https://watchasian.net' + anchor['href']) for anchor in search_results]
 		return paired_results # (title, url) pair list is returned
 
 
