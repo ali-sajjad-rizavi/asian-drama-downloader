@@ -1,6 +1,7 @@
 import os, glob
 
-from dramanice import DramaScraper as DramaniceScraper
+#from dramanice import DramaScraper as DramaniceScraper
+from watchasian import DramaScraper as WatchasianScraper
 import download_link_builder
 
 
@@ -75,13 +76,13 @@ def main():
     #
     searchInput = input('- Enter Drama Name/URL: ')
     if 'dramanice' in searchInput:
-    	drama_scraper = DramaniceScraper(searchInput)
+    	drama_scraper = WatchasianScraper(searchInput)
     else:
     	print('\n\tResults:\n')
-    	search_results = DramaniceScraper.searchDrama(query=searchInput)
+    	search_results = WatchasianScraper.searchDrama(query=searchInput)
     	[print(f'\t {i+1}) {search_results[i][0]}') for i in range(len(search_results))]
     	selected_index = int(input('\n- Select your option: ')) - 1
-    	drama_scraper = DramaniceScraper(search_results[selected_index][1])
+    	drama_scraper = WatchasianScraper(search_results[selected_index][1])
     #
     print("\t -FOUND:", drama_scraper.episode_count, " Episodes in TOTAL!\n")
     #-----
